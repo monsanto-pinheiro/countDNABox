@@ -51,7 +51,7 @@ def save_output(dt_data, handle_out, sz_header):
 
 if __name__ == '__main__':
 
-	parser = OptionParser(usage="%prog [-f fasta|fastq] [-io]", version="%prog 0.1", add_help_option=False,)
+	parser = OptionParser(usage="%prog [-h] [-s] arguments", version="%prog 0.1", add_help_option=False,)
 	parser.add_option("-f", "--format", type="string", dest="format", help="Format of in file, [fasta|fastq]", metavar="FORMAT")
 	parser.add_option("-o", "--dir_output", type="string", dest="dir_output", help="Output directory", metavar="OUT_DIR")
 	parser.add_option("-i", "--input", type="string", dest="input", help="Files separated by comma without space", metavar="IN_FILES")
@@ -77,6 +77,17 @@ if __name__ == '__main__':
 	if (len(args) != 0):
 		parser.error("incorrect number of arguments")
 	
+	if not options.format:   # 
+		parser.error('Format not specified [fasta|fastq]')
+	if not options.dir_output:   # 
+		parser.error('Output directory not specified')
+	if not options.input:   # 
+		parser.error('File[s] not specified')
+	if not options.dna_box_1:   # 
+		parser.error('First DNA box not specified, could be degenerate')
+	if not options.dna_box_2:   # 
+		parser.error('Second DNA box not specified, could be degenerate')
+
 	if (options.format <> "fasta" and options.format <> "fastq"):
 		sys.exit("Error: input format file must be 'fasta' or 'fastq'")
 	
