@@ -9,8 +9,11 @@ dt_ambigous = { 'R':'[AG]', 'Y':'[TC]', 'K':'[GT]', 'M':'[AC]', 'S':'[GC]',
 
 #complement
 def complement(seq):  
-	complement = {'A': 'T', 'C': 'G', 'G': 'C', 'T': 'A', 'Y': 'Y', 'N': 'N', 'R': 'R', 'K': 'K', 'M': 'M', 'S': 'S', 'W': 'W'}  
-	complseq = [complement[base] for base in seq]  
+	dict_complement = {'A': 'T', 'C': 'G', 'G': 'C', 'T': 'A',
+		'R': 'Y', 'Y': 'R', 'K': 'M', 'M': 'K', 'S': 'S', 
+		'W': 'W', 'B': 'V', 'D': 'H', 'H': 'D', 'V': 'B', 
+		'N': 'N'}  
+	complseq = [dict_complement[base] for base in seq]  
 	return complseq
 
 
@@ -73,6 +76,7 @@ if __name__ == '__main__':
 		for ambig in vectAmbigous:
 			print "\t%d) %s -> %s" % (count, ambig, dt_ambigous[ambig])
 			count += 1
+		sys.exit(0)
 
 	if (len(args) != 0):
 		parser.error("incorrect number of arguments")
